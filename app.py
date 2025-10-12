@@ -23,7 +23,7 @@ df = pd.read_csv(data_path)
 with st.sidebar:
     selected = option_menu(
         menu_title="Dashboard",
-        options=["Statistik Usaha", "Prediksi Modal"],
+        options=["Statistik Usaha", "Prediksi Modal Usaha"],
         icons=["calculator", "bar-chart-line"],
         # menu_icon="cast",
         default_index=0,
@@ -39,7 +39,7 @@ with st.sidebar:
     )
 
 # === HALAMAN 1: PREDIKSI MODAL ===
-if selected == "Prediksi Modal":
+if selected == "Prediksi Modal Usaha":
     st.title("Prediksi Modal Usaha")
     st.markdown(
         "Masukkan data di bawah ini untuk memprediksi **modal usaha** yang dibutuhkan."
@@ -66,7 +66,7 @@ if selected == "Prediksi Modal":
 
         with col2:
             harga_bahan = st.number_input(
-                "Total Harga Bahan (Rp)",
+                "Total Harga Bahan Baku(Rp)",
                 min_value=0,
                 step=50000,
                 help="Total biaya bahan baku utama yang dibutuhkan untuk produksi.",
@@ -103,14 +103,14 @@ elif selected == "Statistik Usaha":
 
     with tab1:
         st.markdown("### Hubungan Omset dan Modal Usaha")
-        fig, ax = plt.subplots(figsize=(6, 4))  # 🔹 Ukuran diperkecil
+        fig, ax = plt.subplots(figsize=(15, 5)) 
         sns.scatterplot(
             data=df,
             x="Omset",
             y="Modal",
             hue="Jenis Usaha",
             style="Lokasi",
-            s=80,  # 🔹 Titik juga sedikit diperkecil
+            s=80, 
         )
         plt.title("Hubungan Omset dan Modal Usaha", fontsize=12)
         plt.xlabel("Omset (Rp)", fontsize=10)
@@ -119,7 +119,7 @@ elif selected == "Statistik Usaha":
 
     with tab2:
         st.markdown("### Hubungan Jumlah Karyawan dan Modal Usaha")
-        fig2, ax2 = plt.subplots(figsize=(6, 4))  # 🔹 Ukuran diperkecil
+        fig2, ax2 = plt.subplots(figsize=(15, 5)) 
         sns.scatterplot(data=df, x="Karyawan", y="Modal", hue="Jenis Usaha", s=80)
         plt.title("Hubungan Karyawan dan Modal Usaha", fontsize=12)
         plt.xlabel("Jumlah Karyawan", fontsize=10)
@@ -129,7 +129,7 @@ elif selected == "Statistik Usaha":
     with tab3:
         st.markdown("### Korelasi antar Variabel")
         corr = df.select_dtypes(include="number").corr()
-        fig3, ax3 = plt.subplots(figsize=(5, 3))  # 🔹 Heatmap dibuat lebih kecil juga
+        fig3, ax3 = plt.subplots(figsize=(15, 5)) 
         sns.heatmap(corr, annot=True, cmap="YlGnBu", fmt=".2f")
         plt.title("Heatmap Korelasi Fitur", fontsize=12)
         st.pyplot(fig3)
