@@ -21,22 +21,45 @@ df = pd.read_csv(data_path)
 
 # === SIDEBAR ===
 with st.sidebar:
+    st.markdown(
+        """
+        <div style="text-align: center;">
+            <img src="https://img.icons8.com/fluency/96/briefcase.png" width="70"/>
+            <h2 style="color:#ff9800; margin-bottom:0;">Prediksi Modal Usaha</h2>
+            <p style="font-size:13px; color:#555; margin-top:0;">
+                Dashboard prediksi & analisis bisnis UMKM
+            </p>
+        </div>
+        <hr style="border:1px solid #ffd54f; margin:10px 0 20px 0;">
+        """,
+        unsafe_allow_html=True,
+    )
+
     selected = option_menu(
-        menu_title="Dashboard",
+        menu_title="Menu Navigasi",
         options=["Statistik Usaha", "Prediksi Modal Usaha"],
-        icons=["calculator", "bar-chart-line"],
-        # menu_icon="cast",
+        icons=["bar-chart-line", "calculator"],
         default_index=0,
         styles={
-            "container": {"background-color": "#f8f9fa"},
+            "container": {"background-color": "#fffbe7", "padding": "10px"},
             "icon": {"color": "#ff9800", "font-size": "20px"},
             "nav-link": {
-                "font-size": "15px",
-                "--hover-color": "#eee",
+                "font-size": "16px",
+                "color": "#333",
+                "margin": "2px 0",
+                "--hover-color": "#ffe0b2",
+                "border-radius": "8px",
             },
-            "nav-link-selected": {"background-color": "#ffd54f"},
+            "nav-link-selected": {
+                "background-color": "#ffd54f",
+                "color": "#000",
+                "font-weight": "bold",
+                "border-radius": "8px",
+            },
         },
     )
+
+# ...existing code...
 
 # === HALAMAN 1: PREDIKSI MODAL ===
 if selected == "Prediksi Modal Usaha":
@@ -103,14 +126,14 @@ elif selected == "Statistik Usaha":
 
     with tab1:
         st.markdown("### Hubungan Omset dan Modal Usaha")
-        fig, ax = plt.subplots(figsize=(15, 5)) 
+        fig, ax = plt.subplots(figsize=(15, 5))
         sns.scatterplot(
             data=df,
             x="Omset",
             y="Modal",
             hue="Jenis Usaha",
             style="Lokasi",
-            s=80, 
+            s=80,
         )
         plt.title("Hubungan Omset dan Modal Usaha", fontsize=12)
         plt.xlabel("Omset (Rp)", fontsize=10)
@@ -119,7 +142,7 @@ elif selected == "Statistik Usaha":
 
     with tab2:
         st.markdown("### Hubungan Jumlah Karyawan dan Modal Usaha")
-        fig2, ax2 = plt.subplots(figsize=(15, 5)) 
+        fig2, ax2 = plt.subplots(figsize=(15, 5))
         sns.scatterplot(data=df, x="Karyawan", y="Modal", hue="Jenis Usaha", s=80)
         plt.title("Hubungan Karyawan dan Modal Usaha", fontsize=12)
         plt.xlabel("Jumlah Karyawan", fontsize=10)
@@ -129,7 +152,7 @@ elif selected == "Statistik Usaha":
     with tab3:
         st.markdown("### Korelasi antar Variabel")
         corr = df.select_dtypes(include="number").corr()
-        fig3, ax3 = plt.subplots(figsize=(15, 5)) 
+        fig3, ax3 = plt.subplots(figsize=(15, 5))
         sns.heatmap(corr, annot=True, cmap="YlGnBu", fmt=".2f")
         plt.title("Heatmap Korelasi Fitur", fontsize=12)
         st.pyplot(fig3)
