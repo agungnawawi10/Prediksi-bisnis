@@ -41,8 +41,8 @@ with st.sidebar:
         icons=["bar-chart-line", "calculator"],
         default_index=0,
         styles={
-            "container": {"background-color": "#fffbe7", "padding": "10px"},
-            "icon": {"color": "#ff9800", "font-size": "20px"},
+            # "container": {"background-color": "#fffbe7", "padding": "10px"},
+            "icon": {"color": "#4E4923", "font-size": "20px"},
             "nav-link": {
                 "font-size": "16px",
                 "color": "#333",

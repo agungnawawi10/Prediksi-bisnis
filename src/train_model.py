@@ -8,8 +8,12 @@ import os
 
 # DATA PATH
 # Pastikan DATA_PATH mengarah ke lokasi file yang benar dari lokasi skrip ini
-DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "modal_usaha.csv")
-MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "model", "model.pkl")
+DATA_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "data", "modal_usaha.csv"
+)
+MODEL_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "..", "model", "model.pkl"
+)
 
 
 def train_model():
@@ -46,28 +50,27 @@ def train_model():
 
     # Evaluasi Model
     y_pred = model.predict(x_test)
-    
+
     # Mean Absolute Error
     mae = mean_absolute_error(y_test, y_pred)
-    
+
     # Koefisien determinasi
     r2 = r2_score(y_test, y_pred)
 
-    print("\n" + "="*30)
+    print("\n" + "=" * 30)
     print("Model Training Complete!")
-    print(f"MAE: {mae:.2f}") # Format diperbaiki
+    print(f"MAE: {mae:.2f}")  # Format diperbaiki
     print(f"R2 Score: {r2:.2f}")
-    print("="*30)
-    
+    print("=" * 30)
+
     # Simpan model dan encoder
     os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
-    joblib.dump({
-        'model' : model,
-        'le_jenis' : le_jenis,
-        'le_lokasi': le_lokasi
-    }, MODEL_PATH)
-    
+    joblib.dump(
+        {"model": model, "le_jenis": le_jenis, "le_lokasi": le_lokasi}, MODEL_PATH
+    )
+
     print(f"Model and Encoders saved to {MODEL_PATH}")
+
 
 # Menjalankan fungsi train_model
 if __name__ == "__main__":
