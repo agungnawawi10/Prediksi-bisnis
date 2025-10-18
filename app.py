@@ -19,18 +19,25 @@ le_lokasi = model_data["le_lokasi"]
 data_path = os.path.join("data", "modal_usaha.csv")
 df = pd.read_csv(data_path)
 
+# Define blue color palette
+PRIMARY_BLUE = "#1E90FF"  # Dodger Blue
+SECONDARY_BLUE = "#87CEFA" # Light Sky Blue
+LIGHT_BLUE = "#ADD8E6"   # Light Blue
+TEXT_COLOR = "#333333"
+ACCENT_COLOR = "#4682B4" # Steel Blue
+
 # === SIDEBAR ===
 with st.sidebar:
     st.markdown(
-        """
+        f"""
         <div style="text-align: center;">
             <img src="https://img.icons8.com/fluency/96/briefcase.png" width="70"/>
-            <h2 style="color:#ff9800; margin-bottom:0;">Prediksi Modal Usaha</h2>
-            <p style="font-size:13px; color:#555; margin-top:0;">
+            <h2 style="color:{PRIMARY_BLUE}; margin-bottom:0;">Prediksi Modal Usaha</h2>
+            <p style="font-size:13px; color:{TEXT_COLOR}; margin-top:0;">
                 Dashboard prediksi & analisis bisnis UMKM
             </p>
         </div>
-        <hr style="border:1px solid #ffd54f; margin:10px 0 20px 0;">
+        <hr style="border:1px solid {ACCENT_COLOR}; margin:10px 0 20px 0;">
         """,
         unsafe_allow_html=True,
     )
@@ -41,18 +48,17 @@ with st.sidebar:
         icons=["bar-chart-line", "calculator"],
         default_index=0,
         styles={
-            # "container": {"background-color": "#fffbe7", "padding": "10px"},
-            "icon": {"color": "#4E4923", "font-size": "20px"},
+            "icon": {"color": ACCENT_COLOR, "font-size": "20px"},
             "nav-link": {
                 "font-size": "16px",
-                "color": "#333",
+                "color": TEXT_COLOR,
                 "margin": "2px 0",
-                "--hover-color": "#ffe0b2",
+                "--hover-color": LIGHT_BLUE,
                 "border-radius": "8px",
             },
             "nav-link-selected": {
-                "background-color": "#ffd54f",
-                "color": "#000",
+                "background-color": SECONDARY_BLUE,
+                "color": "#FFF", # White text for selected item
                 "font-weight": "bold",
                 "border-radius": "8px",
             },
@@ -107,7 +113,7 @@ if selected == "Prediksi Modal Usaha":
                 help="Perkiraan total pendapatan (penjualan).",
             )
 
-        submitted = st.form_submit_button("🔮 Prediksi Modal")
+        submitted = st.form_submit_button("Prediksi Modal")
 
     if submitted:
         prediksi = predict_modal(
@@ -134,25 +140,32 @@ elif selected == "Statistik Usaha":
             hue="Jenis Usaha",
             style="Lokasi",
             s=80,
+            palette="viridis", # Changed palette to a blue-ish one
         )
-        plt.title("Hubungan Omset dan Modal Usaha", fontsize=12)
-        plt.xlabel("Omset (Rp)", fontsize=10)
-        plt.ylabel("Modal (Rp)", fontsize=10)
+        plt.title("Hubungan Omset dan Modal Usaha", fontsize=12, color=TEXT_COLOR)
+        plt.xlabel("Omset (Rp)", fontsize=10, color=TEXT_COLOR)
+        plt.ylabel("Modal (Rp)", fontsize=10, color=TEXT_COLOR)
+        plt.tick_params(axis='x', colors=TEXT_COLOR)
+        plt.tick_params(axis='y', colors=TEXT_COLOR)
         st.pyplot(fig)
 
     with tab2:
-        st.markdown("### Hubungan Jumlah Karyawan dan Modal Usaha")
+        st.markdown("Hubungan Jumlah Karyawan dan Modal Usaha")
         fig2, ax2 = plt.subplots(figsize=(15, 5))
-        sns.scatterplot(data=df, x="Karyawan", y="Modal", hue="Jenis Usaha", s=80)
-        plt.title("Hubungan Karyawan dan Modal Usaha", fontsize=12)
-        plt.xlabel("Jumlah Karyawan", fontsize=10)
-        plt.ylabel("Modal (Rp)", fontsize=10)
+        sns.scatterplot(data=df, x="Karyawan", y="Modal", hue="Jenis Usaha", s=80, palette="viridis")
+        plt.title("Hubungan Karyawan dan Modal Usaha", fontsize=12, color=TEXT_COLOR)
+        plt.xlabel("Jumlah Karyawan", fontsize=10, color=TEXT_COLOR)
+        plt.ylabel("Modal (Rp)", fontsize=10, color=TEXT_COLOR)
+        plt.tick_params(axis='x', colors=TEXT_COLOR)
+        plt.tick_params(axis='y', colors=TEXT_COLOR)
         st.pyplot(fig2)
 
     with tab3:
         st.markdown("### Korelasi antar Variabel")
         corr = df.select_dtypes(include="number").corr()
         fig3, ax3 = plt.subplots(figsize=(15, 5))
-        sns.heatmap(corr, annot=True, cmap="YlGnBu", fmt=".2f")
-        plt.title("Heatmap Korelasi Fitur", fontsize=12)
+        sns.heatmap(corr, annot=True, cmap="YlGnBu", fmt=".2f") # YlGnBu has blue tones
+        plt.title("Heatmap Korelasi Fitur", fontsize=12, color=TEXT_COLOR)
+        plt.tick_params(axis='x', colors=TEXT_COLOR)
+        plt.tick_params(axis='y', colors=TEXT_COLOR)
         st.pyplot(fig3)
