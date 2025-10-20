@@ -28,19 +28,19 @@ ACCENT_COLOR = "#4682B4" # Steel Blue
 
 # === SIDEBAR ===
 with st.sidebar:
-    st.markdown(
-        f"""
-        <div style="text-align: center;">
-            <img src="https://img.icons8.com/fluency/96/briefcase.png" width="70"/>
-            <h2 style="color:{PRIMARY_BLUE}; margin-bottom:0;">Prediksi Modal Usaha</h2>
-            <p style="font-size:13px; color:{TEXT_COLOR}; margin-top:0;">
-                Dashboard prediksi & analisis bisnis UMKM
-            </p>
-        </div>
-        <hr style="border:1px solid {ACCENT_COLOR}; margin:10px 0 20px 0;">
-        """,
-        unsafe_allow_html=True,
-    )
+    # st.markdown(
+    #     f"""
+    #     <div style="text-align: center;">
+    #         <img src="https://img.icons8.com/fluency/96/briefcase.png" width="70"/>
+    #         <h2 style="color:{PRIMARY_BLUE}; margin-bottom:0;">Prediksi Modal Usaha</h2>
+    #         <p style="font-size:13px; color:{TEXT_COLOR}; margin-top:0;">
+    #             Dashboard prediksi & analisis bisnis UMKM
+    #         </p>
+    #     </div>
+    #     <hr style="border:1px solid {ACCENT_COLOR}; margin:10px 0 20px 0;">
+    #     """,
+    #     unsafe_allow_html=True,
+    # )
 
     selected = option_menu(
         menu_title="Menu Navigasi",
@@ -131,7 +131,7 @@ elif selected == "Statistik Usaha":
     )
 
     with tab1:
-        st.markdown("### Hubungan Omset dan Modal Usaha")
+        st.markdown("Hubungan Omset dan Modal Usaha")
         fig, ax = plt.subplots(figsize=(15, 5))
         sns.scatterplot(
             data=df,
@@ -161,7 +161,7 @@ elif selected == "Statistik Usaha":
         st.pyplot(fig2)
 
     with tab3:
-        st.markdown("### Korelasi antar Variabel")
+        st.markdown("Korelasi antar Variabel")
         corr = df.select_dtypes(include="number").corr()
         fig3, ax3 = plt.subplots(figsize=(15, 5))
         sns.heatmap(corr, annot=True, cmap="YlGnBu", fmt=".2f") # YlGnBu has blue tones
