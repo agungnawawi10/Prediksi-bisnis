@@ -69,8 +69,6 @@ def train_model():
         {"model": model, "le_jenis": le_jenis, "le_lokasi": le_lokasi}, MODEL_PATH
     )
 
-    print(f"Model and Encoders saved to {MODEL_PATH}")
-
 
 # Menjalankan fungsi train_model
 if __name__ == "__main__":
