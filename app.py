@@ -14,7 +14,7 @@ st.set_page_config(page_title="Prediksi Modal Usaha 💰", layout="wide", page_i
 # Define blue color palette
 PRIMARY_BLUE = "#1E90FF"  # Dodger Blue
 SECONDARY_BLUE = "#187bcd" # darker accent
-LIGHT_BLUE = "#E8F4FF"   # very light blue background
+LIGHT_BLUE = "#91B4D3"   # very light blue background
 TEXT_COLOR = "#0f1724"
 CARD_BG = "#f7fbff"
 
