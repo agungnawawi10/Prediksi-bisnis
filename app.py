@@ -158,7 +158,7 @@ if selected == "Prediksi Modal Usaha":
 
     if submitted:
         prediksi = predict_modal(jenis_usaha, lokasi, karyawan, harga_bahan, target_produksi, omset)
-        st.success(f"💸 Estimasi Modal Usaha: Rp {prediksi:,.0f}")
+        st.success(f"Estimasi Modal Usaha: Rp {prediksi:,.0f}")
         st.markdown("""
             <div style="font-size:13px; color:#475569; margin-top:6px;">
                 Hasil di atas adalah estimasi berdasarkan model. Untuk hasil lebih akurat, tambahkan data historis dan fitur relevan.
